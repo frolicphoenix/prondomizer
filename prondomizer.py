@@ -29,6 +29,8 @@ def main():
     print("Welcome to Project Randomizer!")
     projects = load_projects()
     
+    chosen_project = None
+    
     while True:
         action = input("Enter 'a' to add a project, 'r' for random project, or 'q' to quit: ")
         if action.lower() == 'q':
@@ -36,13 +38,22 @@ def main():
         elif action.lower() == 'a':
             add_project(projects)
         elif action.lower() == 'r':
-            project = get_random_project(projects)
-            if project:
-                print(f"Your random project: {project['name']}")
+            chosen_project = get_random_project(projects)
+            if chosen_project:
+                print(f"Your random project: {chosen_project['name']}")
             else:
                 print("No available projects!")
     
     save_projects(projects)
+    
+    # Write output to file
+    if chosen_project:
+        with open('randomizer_output.txt', 'w') as f:
+            f.write(f"Your random project for today: {chosen_project['name']}")
+    else:
+        with open('randomizer_output.txt', 'w') as f:
+            f.write("No project was chosen or no projects available.")
 
 if __name__ == "__main__":
     main()
+
