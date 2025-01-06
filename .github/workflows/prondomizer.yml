@@ -24,3 +24,17 @@ jobs:
     
     - name: Run randomizer script
       run: python prondomizer.py
+    
+    - name: Upload randomizer output
+      uses: actions/upload-artifact@v2
+      with:
+        name: randomizer-output
+        path: randomizer_output.txt
+    
+    - name: Commit randomizer output
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add randomizer_output.txt
+        git commit -m "Update randomizer output" || echo "No changes to commit"
+        git push
