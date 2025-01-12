@@ -45,7 +45,7 @@ def main():
                 else:
                     print("No available projects!")
     else:
-        # Non-interactive mode (e.g., GitHub Actions)
+        # Non-interactive mode
         chosen_project = get_random_project(projects)
     
     save_projects(projects)
